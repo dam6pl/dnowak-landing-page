@@ -11,7 +11,8 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'
     $captchaResponse = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret={$captchaSecret}&response={$captchaToken}");
     $captchaResponse = json_decode($captchaResponse, true);
 
-    if ($captchaResponse['success'] === 1 && $captchaResponse['action'] === $_POST['action']) {
+    if ($captchaResponse['success'] === true && $captchaResponse['action'] === $_POST['action']) {
+        ob_start();
         require_once 'email-template.php';
         $content = ob_get_clean();
 
