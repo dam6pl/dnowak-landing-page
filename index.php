@@ -1,4 +1,5 @@
 <?php
+require_once '.env.php';
 require_once 'static/validation.php';
 require_once 'static/language.php';
 ?>
