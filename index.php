@@ -26,7 +26,7 @@ require_once 'static/language.php';
     <link href="/static/css/style.css" rel="stylesheet">
 
     <script src="/static/js/pace.min.js"></script>
-    <script src='https://www.google.com/recaptcha/api.js?render=6LePJZgUAAAAAGjoi2wG1-wr0yoK4J6HGBwRy6qW'></script>
+    <script src='https://www.google.com/recaptcha/api.js?render=6LelXLgUAAAAANdJ9h5jZqn8Rq2JCDdMHuXbOBgw'></script>
 </head>
 <body>
 

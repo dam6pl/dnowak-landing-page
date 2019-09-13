@@ -6,7 +6,7 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'
     $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING);
     $message = filter_input(INPUT_POST, 'message', FILTER_SANITIZE_STRING);
 
-    $captchaSecret = '6LePJZgUAAAAAHdp33ZWZ4I5oy7L-TZkHyktsNxH';
+    $captchaSecret = $_ENV['api_key'];
     $captchaToken = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRING);
     $captchaResponse = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret={$captchaSecret}&response={$captchaToken}");
     $captchaResponse = json_decode($captchaResponse, true);
