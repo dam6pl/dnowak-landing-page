@@ -1,0 +1,63 @@
+{
+  "path": "/en",
+  "title": "<span>Hi! I'm Damian,</span> just say hello.",
+  "content": "Contact me. I am always open to discussions about new projects, creative ideas or opportunities to be part of your visions.",
+  "contact": [
+    {
+      "label": "Need help?",
+      "link": "me@dnowak.dev",
+      "href": "mailto:me@dnowak.dev"
+    },
+    {
+      "label": "Let's talk about your idea",
+      "link": "+48 535 946 118",
+      "href": "tel:+48535946118"
+    }
+  ],
+  "form": {
+    "fields": [
+      {
+        "label": "Name *",
+        "required": true,
+        "field": "input",
+        "type": "text"
+      },
+      {
+        "label": "Email *",
+        "required": true,
+        "field": "input",
+        "type": "email"
+      },
+      {
+        "label": "Phone number",
+        "required": false,
+        "field": "input",
+        "type": "phone"
+      },
+      {
+        "label": "Message *",
+        "required": true,
+        "field": "textarea"
+      }
+    ],
+    "button": "Send"
+  },
+  "social": [
+    {
+      "icon": ["fab", "facebook-square"],
+      "link": "https://www.facebook.com/damiannowak42"
+    },
+    {
+      "icon": ["fab", "instagram"],
+      "link": "http://instagram.com/dam6pl"
+    },
+    {
+      "icon": ["fab", "github-square"],
+      "link": "http://github.com/dam6pl"
+    },
+    {
+      "icon": ["fab", "linkedin"],
+      "link": "http://linkedin.com/in/damiannowak42"
+    }
+  ]
+}

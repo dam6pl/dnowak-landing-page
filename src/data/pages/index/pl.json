@@ -1,0 +1,67 @@
+{
+  "path": "/",
+  "title": "<span>Cześć! Jestem Damian,</span> po prostu przywitaj się.",
+  "content": "Skontaktuj się ze mna. Zawsze jestem otwarty na dyskusję o nowych projektach, kreatywnych pomysłach lub możliwościach, aby być częścią Twoich wizji.",
+  "contact": [
+    {
+      "label": "Potrzebujesz pomocy?",
+      "link": "me@dnowak.dev",
+      "href": "mailto:me@dnowak.dev"
+    },
+    {
+      "label": "Porozmawiajmy o Twoim pomyśle",
+      "link": "+48 535 946 118",
+      "href": "tel:+48535946118"
+    }
+  ],
+  "form": {
+    "fields": [
+      {
+        "name": "name",
+        "label": "Imię i nazwisko *",
+        "required": true,
+        "field": "input",
+        "type": "text"
+      },
+      {
+        "name": "email",
+        "label": "Adres email *",
+        "required": true,
+        "field": "input",
+        "type": "email"
+      },
+      {
+        "name": "phone",
+        "label": "Numer telefonu",
+        "required": false,
+        "field": "input",
+        "type": "phone"
+      },
+      {
+        "name": "message",
+        "label": "Wiadomość *",
+        "required": true,
+        "field": "textarea"
+      }
+    ],
+    "button": "Wyślij wiadomość"
+  },
+  "social": [
+    {
+      "icon": ["fab", "facebook-square"],
+      "link": "https://www.facebook.com/damiannowak42"
+    },
+    {
+      "icon": ["fab", "instagram"],
+      "link": "http://instagram.com/dam6pl"
+    },
+    {
+      "icon": ["fab", "github-square"],
+      "link": "http://github.com/dam6pl"
+    },
+    {
+      "icon": ["fab", "linkedin"],
+      "link": "http://linkedin.com/in/damiannowak42"
+    }
+  ]
+}
