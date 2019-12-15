@@ -1,0 +1,11 @@
+@import "./variables";
+
+body {
+  background-color: $background-color-primary;
+  color: $font-color-primary;
+
+  @media screen and (prefers-color-scheme: dark) {
+    background-color: $dark-background-color-primary;
+    color: $dark-font-color-primary;
+  }
+}

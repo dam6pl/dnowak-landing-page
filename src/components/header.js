@@ -1,42 +1,28 @@
 import { Link } from "gatsby"
-import PropTypes from "prop-types"
 import React from "react"
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
+import { Col } from "react-bootstrap"
+
+import "./../assets/scss/components/header.scss"
+import enFlag from "./../assets/images/en.svg"
+import plFlag from "./../assets/images/pl.svg"
+
+const Header = ({ lang }) => (
+  <header>
+    <Col className="language-switcher">
+      <Link to={toLang(lang)}>
+        <img src={lang === "en" ? plFlag : enFlag} alt="" />
+      </Link>
+    </Col>
   </header>
 )
 
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
+const toLang = lang => {
+  if (lang === "en") {
+    return window.location.pathname.replace(/en\/?/, "")
+  }
 
-Header.defaultProps = {
-  siteTitle: ``,
+  return window.location.pathname.replace(/\/$/, "") + "/en"
 }
 
 export default Header

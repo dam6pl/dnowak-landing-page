@@ -1,5 +1,14 @@
 {
+  "lang": "en",
   "path": "/en",
+  "seo": {
+    "lang": "en",
+    "title": "Damian Nowak",
+    "pageTitle": "dnowak.dev",
+    "meta": {
+      "metaDescription": "Designing websites, company websites and portals and creating effective online stores based on CMS WordPress."
+    }
+  },
   "title": "<span>Hi! I'm Damian,</span> just say hello.",
   "content": "Contact me. I am always open to discussions about new projects, creative ideas or opportunities to be part of your visions.",
   "contact": [
@@ -45,19 +54,35 @@
   "social": [
     {
       "icon": ["fab", "facebook-square"],
-      "link": "https://www.facebook.com/damiannowak42"
+      "link": {
+        "href": "https://www.facebook.com/damiannowak42",
+        "rel": "noopener noreferrer",
+        "target": "_blank"
+      }
     },
     {
       "icon": ["fab", "instagram"],
-      "link": "http://instagram.com/dam6pl"
+      "link": {
+        "href": "http://instagram.com/dam6pl",
+        "rel": "noopener noreferrer",
+        "target": "_blank"
+      }
     },
     {
       "icon": ["fab", "github-square"],
-      "link": "http://github.com/dam6pl"
+      "link": {
+        "href": "http://github.com/dam6pl",
+        "rel": "noopener noreferrer",
+        "target": "_blank"
+      }
     },
     {
       "icon": ["fab", "linkedin"],
-      "link": "http://linkedin.com/in/damiannowak42"
+      "link": {
+        "href": "http://linkedin.com/in/damiannowak42",
+        "rel": "noopener noreferrer",
+        "target": "_blank"
+      }
     }
   ]
 }

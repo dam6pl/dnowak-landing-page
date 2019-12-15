@@ -1,5 +1,5 @@
 import React from "react"
-import { graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -9,27 +9,16 @@ import { fab } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import "./../assets/scss/templates/index.scss"
-import enFlag from "./../assets/images/en.svg"
-import plFlag from "./../assets/images/pl.svg"
 
 library.add(fab)
 
 const IndexPage = ({ data }) => (
-  <Layout>
-    <SEO title="Home" />
-    {console.log(data.indexJson)}
-    <Container id="index-template">
-      <Row className="language">
+  <Layout lang={data.indexJson.lang}>
+    <SEO {...data.indexJson.seo} />
+    <Col id="index-template">
+      <Row>
         <Col>
           <h1 dangerouslySetInnerHTML={{ __html: data.indexJson.title }}></h1>
-          <div className="language-switcher">
-            <Link to={data.indexJson.path.startsWith("/en") ? "/" : "/en"}>
-              <img
-                src={data.indexJson.path.startsWith("/en") ? plFlag : enFlag}
-                alt=""
-              />
-            </Link>
-          </div>
         </Col>
       </Row>
       <Row className="my-3">
@@ -37,13 +26,7 @@ const IndexPage = ({ data }) => (
           <p>{data.indexJson.content}</p>
           <Row>
             {data.indexJson.contact.map((item, key) => (
-              <Col
-                xs={12}
-                sm={6}
-                lg={12}
-                key={key}
-                className="contact mt-3 mt-lg-4"
-              >
+              <Col xs={12} sm={6} key={key} className="contact mt-3 mt-lg-4">
                 <h4>{item.label}</h4>
                 <a href={item.href}>{item.link}</a>
               </Col>
@@ -51,7 +34,13 @@ const IndexPage = ({ data }) => (
           </Row>
         </Col>
         <Col md={6} className="mt-3">
-          <form action="#" method="post" id="contact">
+          <form
+            action="#"
+            method="post"
+            id="contact"
+            data-netlify="true"
+            data-netlify-recaptcha="true"
+          >
             {data.indexJson.form.fields.map((item, key) => (
               <label htmlFor={item.name} key={key}>
                 <span>{item.label}</span>
@@ -67,6 +56,7 @@ const IndexPage = ({ data }) => (
                     name={item.name}
                     id={item.name}
                     required={item.required}
+                    rows={4}
                   ></textarea>
                 )}
               </label>
@@ -80,25 +70,25 @@ const IndexPage = ({ data }) => (
         <Col className="mt-4 mt-lg-0">
           <div className="icons my-3 mt-lg-5">
             {data.indexJson.social.map((item, key) => (
-              <a
-                href={item.link}
-                rel="noopener noreferrer"
-                target="_blank"
-                key={key}
-              >
+              <a {...item.link} key={key}>
                 <FontAwesomeIcon icon={item.icon} />
               </a>
             ))}
           </div>
         </Col>
       </Row>
-    </Container>
+    </Col>
   </Layout>
 )
 
 export const query = graphql`
   query($slug: String!) {
     indexJson(path: { eq: $slug }) {
+      seo {
+        title
+        pageTitle
+      }
+      lang
       title
       content
       path
@@ -119,7 +109,11 @@ export const query = graphql`
       }
       social {
         icon
-        link
+        link {
+          href
+          rel
+          target
+        }
       }
     }
   }

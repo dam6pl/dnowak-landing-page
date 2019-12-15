@@ -1,9 +1,3 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/node-apis/
- */
-
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
@@ -18,7 +12,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             }
           }
         }
-        allCvJson {
+        allAboutJson {
           edges {
             node {
               path
@@ -35,11 +29,20 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return
   }
 
-  const indexTemplate = `${__dirname}/src/templates/index.js`
   result.data.allIndexJson.edges.forEach(({ node }) => {
     createPage({
       path: `${node.path}`,
-      component: indexTemplate,
+      component: `${__dirname}/src/templates/index.js`,
+      context: {
+        slug: node.path,
+      },
+    })
+  })
+
+  result.data.allAboutJson.edges.forEach(({ node }) => {
+    createPage({
+      path: `${node.path}`,
+      component: `${__dirname}/src/templates/about.js`,
       context: {
         slug: node.path,
       },

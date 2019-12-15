@@ -1,18 +1,29 @@
+@import "./../variables";
+
 #index-template {
   h1 {
     span {
-      color: #38b09d;
+      color: $font-color-action;
       display: block;
       position: relative;
+
+      @media screen and (prefers-color-scheme: dark) {
+        color: $dark-font-color-action;
+      }
+
       &:before {
         content: "";
         width: 80px;
         height: 10px;
         position: absolute;
-        background: #c7c7c7;
+        background: $background-color-second;
         bottom: 5px;
         left: -15px;
         z-index: -1;
+
+        @media screen and (prefers-color-scheme: dark) {
+          background: $dark-background-color-second;
+        }
       }
     }
   }
@@ -24,39 +35,29 @@
   .contact {
     h4 {
       font-size: 0.8rem;
-      color: #aaa;
+      color: $font-color-second;
+
+      @media screen and (prefers-color-scheme: dark) {
+        color: $dark-font-color-second;
+      }
     }
 
     a {
-      color: #333;
+      color: $font-color-primary;
       font-weight: 700;
       text-decoration: none;
       transition: color 0.25s ease-in-out;
       font-size: 1rem;
 
-      &:hover {
-        color: #38b09d;
+      @media screen and (prefers-color-scheme: dark) {
+        color: $dark-font-color-primary;
       }
-    }
-  }
 
-  .language {
-    position: relative;
+      &:hover {
+        color: $font-color-action;
 
-    .language-switcher {
-      position: absolute;
-      right: 15px;
-      top: 0;
-
-      a {
-        width: 25px;
-        height: 24px;
-        display: block;
-        float: left;
-        margin-left: 10px;
-
-        img {
-          border: 1px solid #c5c5c5;
+        @media screen and (prefers-color-scheme: dark) {
+          color: $dark-font-color-action;
         }
       }
     }
@@ -67,16 +68,28 @@
       display: block;
       width: 100%;
       margin-bottom: 20px;
-      border: 1px solid #c7c7c7;
+      border: 1px solid $background-color-second;
       position: relative;
       padding: 10px 5px 5px;
       transition: border-color 0.25s ease-in-out;
 
+      @media screen and (prefers-color-scheme: dark) {
+        border-color: $dark-background-color-second;
+      }
+
       &:focus-within {
-        border-color: #333;
+        border-color: $background-color-action;
+
+        @media screen and (prefers-color-scheme: dark) {
+          border-color: $dark-background-color-action;
+        }
 
         span {
-          color: #333;
+          color: $font-color-primary;
+
+          @media screen and (prefers-color-scheme: dark) {
+            color: $dark-font-color-primary;
+          }
         }
       }
 
@@ -87,6 +100,12 @@
         padding: 0 10px;
         font-size: 1rem;
         resize: none;
+        background: transparent;
+        color: $font-color-primary;
+
+        @media screen and (prefers-color-scheme: dark) {
+          color: $dark-font-color-primary;
+        }
 
         &:focus {
           outline: none;
@@ -98,24 +117,34 @@
         position: absolute;
         top: -10px;
         left: 10px;
-        background: #fff;
+        background: $background-color-primary;
         padding: 0 9px;
         font-size: 12px;
-        color: #c7c7c7;
+        color: $font-color-primary;
         transition: color 0.25s ease-in-out;
+
+        @media screen and (prefers-color-scheme: dark) {
+          background: $dark-background-color-primary;
+          color: $dark-font-color-primary;
+        }
       }
     }
 
     button {
       float: right;
-      background-color: #38b09d;
+      background-color: $font-color-action;
       color: #fff;
       border: none;
       padding: 10px 20px;
       transition: background-color 0.25s ease-in-out;
 
+      @media screen and (prefers-color-scheme: dark) {
+        background-color: $dark-font-color-action;
+        //color: $dark-font-color-primary;
+      }
+
       &:hover {
-        background-color: #329d8c;
+        background-color: darken($font-color-action, 5%) !important;
       }
     }
   }
@@ -127,12 +156,25 @@
     margin: 0 auto;
 
     a {
-      color: #333;
+      color: $font-color-primary;
       font-size: 2rem;
       transition: color 0.25s ease-in-out;
 
+      @media screen and (prefers-color-scheme: dark) {
+        color: $dark-font-color-primary;
+      }
+
       &:hover {
-        color: #38b09d;
+        color: $font-color-action;
+
+        @media screen and (prefers-color-scheme: dark) {
+          color: $dark-font-color-action;
+        }
+      }
+
+      svg {
+        max-width: 28px;
+        max-height: 28px;
       }
     }
   }
