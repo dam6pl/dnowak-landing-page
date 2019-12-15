@@ -7,7 +7,7 @@ import "./../assets/scss/components/header.scss"
 import enFlag from "./../assets/images/en.svg"
 import plFlag from "./../assets/images/pl.svg"
 
-const windowGlobal = typeof window !== "undefined" && window
+const windowGlobal = (typeof window !== "undefined" && window) || {}
 
 const Header = ({ lang }) => (
   <header>
