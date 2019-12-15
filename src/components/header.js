@@ -7,6 +7,8 @@ import "./../assets/scss/components/header.scss"
 import enFlag from "./../assets/images/en.svg"
 import plFlag from "./../assets/images/pl.svg"
 
+const windowGlobal = typeof window !== "undefined" && window
+
 const Header = ({ lang }) => (
   <header>
     <Col className="language-switcher">
@@ -19,10 +21,10 @@ const Header = ({ lang }) => (
 
 const toLang = lang => {
   if (lang === "en") {
-    return window.location.pathname.replace(/en\/?/, "")
+    return windowGlobal.location.pathname.replace(/en\/?/, "")
   }
 
-  return window.location.pathname.replace(/\/$/, "") + "/en"
+  return windowGlobal.location.pathname.replace(/\/$/, "") + "/en"
 }
 
 export default Header

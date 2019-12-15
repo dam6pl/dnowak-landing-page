@@ -1,7 +1,7 @@
+const windowGlobal = typeof window !== "undefined" && window
+
 const NotFoundPage = () => {
-  if (typeof window !== "undefined") {
-    window.location = "/"
-  }
+  windowGlobal.location = "/"
 }
 
 export default NotFoundPage
