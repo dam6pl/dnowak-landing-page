@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[4],{EnGO:function(e,n,t){"use strict";t.r(n);var a=t("q1tI"),l=t.n(a),r=(t("Wbzz"),t("Bl7J")),u=t("vrFN");t("B6kb");n.default=function(e){e.data;return l.a.createElement(r.a,null,l.a.createElement(u.a,{title:"About me"}),l.a.createElement("div",null,"siemanko"))}}}]);
+//# sourceMappingURL=component---src-templates-about-js-e5ce725deffd205b294e.js.map
