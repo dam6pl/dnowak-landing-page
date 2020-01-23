@@ -53,7 +53,11 @@
         "field": "textarea"
       }
     ],
-    "button": "Wyślij wiadomość"
+    "button": "Wyślij wiadomość",
+    "messages": {
+      "success": "Twoja wiadomość została wysłana. Postaram się odpowiedzieć najszybciej jak to możliwe.",
+      "error": "Twoja wiadomość nie została wysłana. Spróbuj ponownie."
+    }
   },
   "social": [
     {

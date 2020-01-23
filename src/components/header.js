@@ -13,7 +13,7 @@ const windowGlobal = (typeof window !== "undefined" && window) || {
 
 const Header = ({ lang }) => (
   <header>
-    <Col className="language-switcher">
+    <Col className="language-switcher d-print-none">
       <Link to={toLang(lang)}>
         <img src={lang === "en" ? plFlag : enFlag} alt="" />
       </Link>

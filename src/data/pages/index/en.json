@@ -49,7 +49,11 @@
         "field": "textarea"
       }
     ],
-    "button": "Send"
+    "button": "Send",
+    "messages": {
+      "success": "Your message has been sent. I will try to answer as soon as possible.",
+      "error": "Your message has not been sent. Try again."
+    }
   },
   "social": [
     {

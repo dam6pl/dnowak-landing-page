@@ -15,7 +15,6 @@
   }
 
   footer {
-    margin-top: 30px;
     font-size: 0.8rem;
     color: $font-color-primary;
     font-weight: bold;
@@ -41,8 +40,13 @@
 }
 
 @media print {
-  div[class^="col-"] {
+  div[class*="col-"],
+  div.col {
     flex: 0 0 100% !important;
     max-width: 100% !important;
+  }
+
+  #layout {
+    justify-content: flex-start;
   }
 }

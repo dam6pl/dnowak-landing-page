@@ -147,6 +147,18 @@
         background-color: darken($font-color-action, 5%) !important;
       }
     }
+
+    .message {
+      font-size: 0.8rem;
+
+      &.success {
+        color: #4caf50;
+      }
+
+      &.error {
+        color: #f44336;
+      }
+    }
   }
 
   .icons {
