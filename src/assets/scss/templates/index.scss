@@ -171,6 +171,9 @@
       color: $font-color-primary;
       font-size: 2rem;
       transition: color 0.25s ease-in-out;
+      max-width: 50px;
+      max-height: 50px;
+      overflow: hidden;
 
       @media screen and (prefers-color-scheme: dark) {
         color: $dark-font-color-primary;

@@ -15,6 +15,7 @@ library.add(fab)
 class IndexPage extends React.Component {
   constructor(props) {
     super(props)
+
     this.state = {
       form: {
         name: "",
@@ -47,14 +48,14 @@ class IndexPage extends React.Component {
         this.setState({
           mail: {
             status: true,
-            message: this.props.data.indexJson.form.messages.success,
+            message: this.props.data.pages.form.messages.success,
           },
         })
       } else {
         this.setState({
           mail: {
             status: false,
-            message: this.props.data.indexJson.form.messages.error,
+            message: this.props.data.pages.form.messages.error,
           },
         })
       }
@@ -64,23 +65,23 @@ class IndexPage extends React.Component {
 
   render() {
     return (
-      <Layout lang={this.props.data.indexJson.lang}>
-        <SEO {...this.props.data.indexJson.seo} />
+      <Layout lang={this.props.data.pages.lang} onLoad>
+        <SEO {...this.props.data.pages.seo} />
         <Col id="index-template">
           <Row>
             <Col>
               <h1
                 dangerouslySetInnerHTML={{
-                  __html: this.props.data.indexJson.title,
+                  __html: this.props.data.pages.title,
                 }}
               ></h1>
             </Col>
           </Row>
           <Row className="my-3">
             <Col md={6} className="my-3">
-              <p>{this.props.data.indexJson.content}</p>
+              <p>{this.props.data.pages.content}</p>
               <Row>
-                {this.props.data.indexJson.contact.map((item, key) => (
+                {this.props.data.pages.contact.map((item, key) => (
                   <Col
                     xs={12}
                     sm={6}
@@ -100,38 +101,41 @@ class IndexPage extends React.Component {
                 id="contact"
                 onSubmit={this.handleSubmit}
               >
-                {this.props.data.indexJson.form.fields.map((item, key) => (
-                  <label htmlFor={item.name} key={key}>
-                    <span>{item.label}</span>
-                    {item.field === "input" ? (
-                      <input
-                        name={item.name}
-                        id={item.name}
-                        required={item.required}
-                        type={item.type}
-                        value={this.state.form[item.name]}
-                        onChange={this.handleChange}
-                      />
-                    ) : (
-                      <textarea
-                        name={item.name}
-                        id={item.name}
-                        required={item.required}
-                        rows={4}
-                        value={this.state.form[item.name]}
-                        onChange={this.handleChange}
-                      ></textarea>
-                    )}
-                  </label>
-                ))}
+                {this.props.data.pages.form.alternative_fields.map(
+                  (item, key) => (
+                    <label htmlFor={item.name} key={key}>
+                      <span>{item.label}</span>
+                      {item.field === "input" ? (
+                        <input
+                          name={item.name}
+                          id={item.name}
+                          required={item.required}
+                          type={item.type}
+                          value={this.state.form[item.name]}
+                          onChange={this.handleChange}
+                        />
+                      ) : (
+                        <textarea
+                          name={item.name}
+                          id={item.name}
+                          required={item.required}
+                          rows={4}
+                          value={this.state.form[item.name]}
+                          onChange={this.handleChange}
+                        ></textarea>
+                      )}
+                    </label>
+                  )
+                )}
 
                 <button type="submit">
-                  {this.props.data.indexJson.form.button}
+                  {this.props.data.pages.form.button}
                 </button>
                 {this.state.mail ? (
                   <div
                     className={
-                      "message " + (this.state.mail.status ? "success" : "fail")
+                      "message " +
+                      (this.state.mail.status ? "success" : "error")
                     }
                   >
                     {this.state.mail.message}
@@ -145,7 +149,7 @@ class IndexPage extends React.Component {
           <Row>
             <Col className="mt-4 mt-lg-0">
               <div className="icons my-3">
-                {this.props.data.indexJson.social.map((item, key) => (
+                {this.props.data.pages.social.map((item, key) => (
                   <a {...item.link} key={key}>
                     <FontAwesomeIcon icon={item.icon} />
                   </a>
@@ -160,34 +164,38 @@ class IndexPage extends React.Component {
 }
 
 export const query = graphql`
-  query($slug: String!) {
-    indexJson(path: { eq: $slug }) {
-      seo {
-        title
-        pageTitle
-      }
-      lang
-      title
-      content
+  query($path: String!) {
+    pages(path: { eq: $path }) {
       path
       contact {
+        href
         label
         link
-        href
       }
+      content
       form {
-        fields {
-          name
-          label
-          required
-          field
-          type
-        }
         button
         messages {
-          success
           error
+          success
         }
+        alternative_fields {
+          type
+          required
+          name
+          label
+          field
+        }
+      }
+      id
+      lang
+      seo {
+        lang
+        meta {
+          metaDescription
+        }
+        pageTitle
+        title
       }
       social {
         icon
@@ -197,6 +205,8 @@ export const query = graphql`
           target
         }
       }
+      template
+      title
     }
   }
 `

@@ -24,6 +24,11 @@
       color: $dark-font-color-primary;
     }
 
+    svg {
+      max-width: 13px;
+      max-height: 13px;
+    }
+
     a {
       color: $font-color-primary;
 

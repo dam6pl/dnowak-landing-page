@@ -27,14 +27,6 @@ module.exports = {
         icon: `src/assets/images/icon.png`,
       },
     },
-    `gatsby-transformer-json`,
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        path: `./src/data/`,
-        typeName: `Json`,
-      },
-    },
     `gatsby-plugin-sass`,
     {
       resolve: `gatsby-plugin-google-analytics`,
@@ -48,6 +40,15 @@ module.exports = {
         sampleRate: 5,
         siteSpeedSampleRate: 10,
         cookieDomain: "dnowak.dev",
+      },
+    },
+    {
+      resolve: "gatsby-source-apiserver",
+      options: {
+        url: `https://dnowak-dev.firebaseio.com/pages.json`,
+        method: "get",
+        name: `pages`,
+        path: `${__dirname}/src/data/auth/`,
       },
     },
   ],
