@@ -147,7 +147,7 @@ class IndexPage extends React.Component {
             </Col>
           </Row>
           <Row>
-            <Col className="mt-4 mt-lg-0">
+            <Col>
               <div className="icons my-3">
                 {this.props.data.pages.social.map((item, key) => (
                   <a {...item.link} key={key}>
