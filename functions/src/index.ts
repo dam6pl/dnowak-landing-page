@@ -5,12 +5,12 @@ const cors = require("cors")({ origin: true })
 admin.initializeApp()
 
 const transporter = nodemailer.createTransport({
-  host: "smtp.zenbox.pl",
-  port: 587,
+  host: functions.config().mail.host || '',
+  port: functions.config().mail.user || 587,
   secure: false,
   auth: {
-    user: "website@dnowak.dev",
-    pass: "ytBLdb7e",
+    user: functions.config().mail.user || '',
+    pass: functions.config().mail.pass || '',
   },
 })
 
