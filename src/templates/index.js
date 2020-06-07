@@ -23,6 +23,7 @@ class IndexPage extends React.Component {
         phone: "",
         message: "",
       },
+      buttonLoading: false,
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -41,26 +42,40 @@ class IndexPage extends React.Component {
   handleSubmit(event) {
     event.preventDefault()
 
-    var xhr = new XMLHttpRequest()
-    xhr.open("POST", "/mail", true)
-    xhr.onload = res => {
-      if (res.target.status === 200) {
-        this.setState({
-          mail: {
-            status: true,
-            message: this.props.data.pages.form.messages.success,
-          },
-        })
-      } else {
-        this.setState({
-          mail: {
-            status: false,
-            message: this.props.data.pages.form.messages.error,
-          },
-        })
-      }
+    if (this.state.buttonLoading) {
+      return
     }
-    xhr.send(JSON.stringify(this.state.form))
+
+    this.setState({
+      buttonLoading: true,
+    })
+
+    fetch("https://us-central1-dnowak-dev.cloudfunctions.net/sendMail", {
+      method: "POST",
+      body: JSON.stringify(this.state.form),
+    })
+      .then(response => response.json())
+      .then(response => {
+        if (response["success"] === true) {
+          this.setState({
+            mail: {
+              status: true,
+              message: this.props.data.pages.form.messages.success,
+            },
+          })
+        } else {
+          this.setState({
+            mail: {
+              status: false,
+              message: this.props.data.pages.form.messages.error,
+            },
+          })
+        }
+
+        this.setState({
+          buttonLoading: false,
+        })
+      })
   }
 
   render() {
@@ -96,7 +111,7 @@ class IndexPage extends React.Component {
             </Col>
             <Col md={6} className="mt-3 d-print-none">
               <form
-                action="#"
+                action=""
                 method="post"
                 id="contact"
                 onSubmit={this.handleSubmit}
@@ -128,7 +143,11 @@ class IndexPage extends React.Component {
                   )
                 )}
 
-                <button type="submit">
+                <button
+                  type="submit"
+                  className={this.state.buttonLoading ? "loading" : ""}
+                  disabled={this.state.buttonLoading}
+                >
                   {this.props.data.pages.form.button}
                 </button>
                 {this.state.mail ? (

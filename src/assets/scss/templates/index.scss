@@ -146,6 +146,11 @@
       &:hover {
         background-color: darken($font-color-action, 5%) !important;
       }
+
+      &.loading {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
     }
 
     .message {
