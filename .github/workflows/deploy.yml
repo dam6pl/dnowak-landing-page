@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: xmflsct/action-publish-gatsby
+      - uses: enriikke/gatsby-gh-pages-action@v2
         with:
-          publishBranch: 'public'
-          token: ${{ secrets.AUTH_GITHUB_TOKEN }}
+          deploy-branch: 'gh-pages'
+          access-token:: ${{ secrets.AUTH_GITHUB_TOKEN }}
