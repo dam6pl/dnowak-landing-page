@@ -9,8 +9,21 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - id: get_version
+        run: echo ::set-output name=VERSION::$(echo ${GITHUB_REF/refs\/tags\//} | sed -e "s/[-a-zA-Z]//g")
+        
       - uses: actions/checkout@v1
+        
       - uses: enriikke/gatsby-gh-pages-action@v2
         with:
           deploy-branch: 'master'
-          access-token: ${{ secrets.AUTH_GITHUB_TOKEN }}
+          access-token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }} - ${{ steps.get_version.outputs.VERSION }}
+          draft: false
+          prerelease: false
