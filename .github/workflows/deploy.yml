@@ -1,0 +1,18 @@
+name: 'Deploy Gatsby Application'
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: xmflsct/action-publish-gatsby@v
+        with:
+          publishBranch: 'public'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          name: 'Gatsby Bot'
+          email: 'gatsby@dnowak.dev'
