@@ -14,5 +14,3 @@ jobs:
         with:
           publishBranch: 'public'
           token: ${{ secrets.AUTH_GITHUB_TOKEN }}
-          name: 'Gatsby Bot'
-          email: 'gatsby@dnowak.dev'
