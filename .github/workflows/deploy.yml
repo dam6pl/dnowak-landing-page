@@ -17,11 +17,11 @@ jobs:
       - uses: enriikke/gatsby-gh-pages-action@v2
         with:
           deploy-branch: 'master'
-          access-token: ${{ secrets.GITHUB_TOKEN }}
+          access-token: ${{ secrets.AUTH_GITHUB_TOKEN }}
           
       - uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.AUTH_GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }} - ${{ steps.get_version.outputs.VERSION }}
