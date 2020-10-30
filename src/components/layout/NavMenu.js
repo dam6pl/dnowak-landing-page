@@ -50,7 +50,7 @@ const NavMenu = ({ language }) => {
         <div className="image">
           {developerPhoto && (
             <LazyPhoto
-              image={developerPhoto.data.thumbnails}
+              image={developerPhoto?.data?.thumbnails}
               alt={developerName}
               imageSize="directus-medium-crop"
             />
@@ -59,10 +59,10 @@ const NavMenu = ({ language }) => {
         <div className="title">{developerName}</div>
         <div className="subtitle subtitle-typed">
           <div className="typing-title">
-            {currentTranslation.developer_position && (
+            {currentTranslation?.developer_position && (
               <Typed
-                strings={currentTranslation.developer_position.map(
-                  (el) => el.Position_name || ""
+                strings={currentTranslation?.developer_position.map(
+                  (el) => el?.Position_name || ""
                 )}
                 typeSpeed={40}
                 backSpeed={50}
@@ -76,7 +76,7 @@ const NavMenu = ({ language }) => {
         <ul>
           <li className={pathname === "/" ? "active" : ""}>
             <Link to="/">
-              <FontAwesomeIcon icon={['fas', 'user']} size="lg" />
+              <FontAwesomeIcon icon={["fas", "user"]} size="lg" />
               <span className="link">{isEnglish ? "About" : "O mnie"}</span>
             </Link>
           </li>
@@ -100,7 +100,7 @@ const NavMenu = ({ language }) => {
           {/*</li>*/}
           <li className={pathname.indexOf("/contact") === 0 ? "active" : ""}>
             <Link to="/contact/">
-              <FontAwesomeIcon icon={['fas', 'envelope']} size="lg" />
+              <FontAwesomeIcon icon={["fas", "envelope"]} size="lg" />
               <span className="link">{isEnglish ? "Contact" : "Kontakt"}</span>
             </Link>
           </li>

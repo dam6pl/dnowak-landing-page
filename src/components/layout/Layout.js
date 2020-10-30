@@ -37,7 +37,7 @@ const Layout = ({ language, children }) => {
   return (
     <div id="application">
       <Helmet key="app-head">
-        <html lang={language}/>
+        <html lang={language} />
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <link
@@ -52,7 +52,9 @@ const Layout = ({ language, children }) => {
           duration={firstTime ? 4000 : 300}
         />
       )}
-      {(loadStage === 2 || loadStage === 3) && (<div key="app-content">{children}</div>)}
+      {(loadStage === 2 || loadStage === 3) && (
+        <div key="app-content">{children}</div>
+      )}
     </div>
   );
 };

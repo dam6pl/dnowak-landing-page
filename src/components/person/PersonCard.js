@@ -74,7 +74,7 @@ const PersonCard = ({ language }) => {
         <div className="slide">
           {backgroundImage && (
             <LazyPhoto
-              image={backgroundImage.data.thumbnails}
+              image={backgroundImage?.data?.thumbnails}
               alt={developerName}
               imageSize="directus-large-crop"
             />
@@ -84,7 +84,7 @@ const PersonCard = ({ language }) => {
         <div className="image">
           {developerPhoto && (
             <LazyPhoto
-              image={developerPhoto.data.thumbnails}
+              image={developerPhoto?.data?.thumbnails}
               alt={developerName}
               imageSize="directus-medium-crop"
             />
@@ -94,10 +94,10 @@ const PersonCard = ({ language }) => {
         <div className="title">{developerName}</div>
         <div className="subtitle subtitle-typed">
           <div className="typing-title">
-            {currentTranslation.developer_position && (
+            {currentTranslation?.developer_position && (
               <Typed
-                strings={currentTranslation.developer_position.map(
-                  (el) => el.Position_name || ""
+                strings={currentTranslation?.developer_position.map(
+                  (el) => el?.Position_name || ""
                 )}
                 typeSpeed={40}
                 backSpeed={50}
@@ -110,10 +110,10 @@ const PersonCard = ({ language }) => {
         {socialIcons && <SocialIcons icons={socialIcons} />}
 
         <div className="lnks">
-          {currentTranslation.cv_file &&
-            currentTranslation.cv_file.data.full_url && (
+          {currentTranslation?.cv_file &&
+            currentTranslation.cv_file?.data?.full_url && (
               <a
-                href={currentTranslation.cv_file.data.full_url}
+                href={currentTranslation?.cv_file?.data?.full_url}
                 target="_blank"
                 rel="noreferrer"
                 className="lnk"

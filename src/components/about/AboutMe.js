@@ -34,16 +34,16 @@ const AboutMe = ({ language }) => {
         <div className="col col-d-6 col-t-6 col-m-12 border-line-v">
           <div
             className="text-box"
-            dangerouslySetInnerHTML={{ __html: currentTranslation.about_me }}
+            dangerouslySetInnerHTML={{ __html: currentTranslation?.about_me || '' }}
           />
         </div>
-        {currentTranslation.facts && (
+        {currentTranslation?.facts && (
           <div className="col col-d-6 col-t-6 col-m-12 border-line-v">
             <div className="info-list">
               <ul>
                 {currentTranslation.facts.map((el) => (
                   <li key={`facts-${Math.random()}`}>
-                    <strong>{el.Title} . . . . .</strong> {el.Value}
+                    <strong>{el?.Title} . . . . .</strong> {el?.Value}
                   </li>
                 ))}
               </ul>

@@ -1,66 +1,83 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Helmet } from "react-helmet";
-import { useLocation } from "@reach/router";
-import { useStaticQuery, graphql } from "gatsby";
+import {Helmet} from "react-helmet";
+import {useLocation} from "@reach/router";
+import {useStaticQuery, graphql} from "gatsby";
 
-const SEO = ({ language, title, description, keywords }) => {
-  const { pathname } = useLocation();
+const SEO = ({language, title, description, keywords, image}) => {
+  const {pathname} = useLocation();
   const {
     site: {
-      siteMetadata: { siteUrl },
+      siteMetadata: {siteUrl},
     },
-    allTranslation: { translations },
+    allTranslation: {translations},
   } = useStaticQuery(graphql`
-    query {
-      site {
-        siteMetadata {
-          siteUrl: url
-        }
+      query {
+          site {
+              siteMetadata {
+                  siteUrl: url
+              }
+          }
+          allTranslation: allDirectusTranslation {
+              translations: nodes {
+                  language
+                  seo_description
+                  seo_keywords
+                  seo_title_template
+                  seo_image {
+                      data {
+                          thumbnails {
+                              url
+                              key
+                          }
+                      }
+                  }
+              }
+          }
       }
-      allTranslation: allDirectusTranslation {
-        translations: nodes {
-          language
-          seo_description
-          seo_keywords
-          seo_title_template
-        }
-      }
-    }
   `);
 
   const currentTranslation = translations.find(
     (el) => el.language === language
   );
 
+  const seoImage = currentTranslation.seo_image
+    && currentTranslation.seo_image?.data?.thumbnails.find(
+      (el) => el.key === 'directus-large-contain'
+    );
+
   const seo = {
     title: title || "",
-    titleTemplate: currentTranslation.seo_title_template || "",
-    description: description || currentTranslation.seo_description || "",
-    keywords: keywords || currentTranslation.seo_keywords || "",
+    titleTemplate: currentTranslation?.seo_title_template || "",
+    description: description || currentTranslation?.seo_description || "",
+    keywords: keywords || currentTranslation?.seo_keywords || "",
     url: `${siteUrl}${pathname}`,
+    image: image || seoImage?.url || ''
   };
+
+  console.clear();
+  console.log(seo);
 
   return (
     <Helmet title={seo.title} titleTemplate={seo.titleTemplate}>
-      <meta name="description" content={seo.description} />
-      {seo.image && <meta name="image" content={seo.image} />}
+      <meta name="description" content={seo.description}/>
+      {seo.image && <meta name="image" content={seo.image}/>}
       {/* Facebook */}
-      <meta property="og:type" content="website" />
-      {seo.url && <meta property="og:url" content={seo.url} />}
-      {seo.title && <meta property="og:title" content={seo.title} />}
+      <meta property="og:type" content="website"/>
+      {seo.url && <meta property="og:url" content={seo.url}/>}
+      {seo.title && <meta property="og:title" content={seo.title}/>}
       {seo.description && (
-        <meta property="og:description" content={seo.description} />
+        <meta property="og:description" content={seo.description}/>
       )}
-      {seo.image && <meta property="og:image" content={seo.image} />}
+      {seo.image && <meta property="og:image" content={seo.image}/>}
       {/* Twitter */}
-      <meta property="twitter:card" content="summary_large_image" />
-      {seo.url && <meta property="twitter:url" content={seo.url} />}
-      {seo.title && <meta property="twitter:title" content={seo.title} />}
+      <meta property="twitter:card" content="summary_large_image"/>
+      {seo.url && <meta property="twitter:url" content={seo.url}/>}
+      {seo.title && <meta property="twitter:title" content={seo.title}/>}
       {seo.description && (
-        <meta property="twitter:description" content={seo.description} />
+        <meta property="twitter:description" content={seo.description}/>
       )}
-      {seo.image && <meta property="twitter:image" content={seo.image} />}
+      {seo.image && <meta property="twitter:image" content={seo.image}/>}
     </Helmet>
   );
 };
@@ -72,10 +89,12 @@ SEO.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   keywords: PropTypes.string,
+  image: PropTypes.string,
 };
 
 SEO.defaultProps = {
   title: null,
   description: null,
   keywords: null,
+  image: null,
 };
