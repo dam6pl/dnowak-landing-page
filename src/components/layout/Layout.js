@@ -18,22 +18,26 @@ library.add(fas, fab);
 const Layout = ({ language, children }) => {
   const cookie = new Cookie();
   const [firstTime] = useState(cookie.get("loaded") !== "1");
-  const [isLoading, setIsLoading] = useState(true);
+  const [loadStage, setLoadStage] = useState(0);
 
   useEffect(() => {
+    setLoadStage(1);
+
+    setTimeout(() => setLoadStage(2), 100);
+
     setTimeout(
       () => {
         firstTime && cookie.set("loaded", "1", { path: "/" });
-        setIsLoading(false);
+        setLoadStage(3);
       },
       firstTime ? 4000 : 300
     );
-  });
+  }, []);
 
   return (
     <div id="application">
       <Helmet key="app-head">
-        <html lang={language} />
+        <html lang={language}/>
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <link
@@ -41,14 +45,14 @@ const Layout = ({ language, children }) => {
           rel="stylesheet"
         />
       </Helmet>
-      {isLoading && (
+      {(loadStage === 1 || loadStage === 2) && (
         <Loader
           key="app-loader"
           withLogo={firstTime}
           duration={firstTime ? 4000 : 300}
         />
       )}
-      <div key="app-content">{children}</div>
+      {(loadStage === 2 || loadStage === 3) && (<div key="app-content">{children}</div>)}
     </div>
   );
 };
