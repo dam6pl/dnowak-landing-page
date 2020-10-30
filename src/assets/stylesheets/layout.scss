@@ -1451,6 +1451,7 @@
   top: 0;
   width: 100%;
   line-height: 13px;
+  margin-top: 10px;
 }
 
 @media (max-width: 1023px) {
@@ -3120,24 +3121,6 @@
   box-shadow: none;
   font-weight: 400;
   -webkit-appearance: textfield;
-}
-
-.search-form input.search-submit {
-  margin-top: -50px;
-  margin-right: 0;
-  padding: 0;
-  float: right;
-  width: 50px;
-  height: 50px;
-  background: url(../images/android-search.png) no-repeat center center;
-  background-size: 18px 18px;
-  font-size: 0;
-  border: none;
-}
-
-.search-form input.search-submit:hover {
-  background: url(../images/android-search.png) no-repeat center center;
-  background-size: 18px 18px;
 }
 
 .content-sidebar h2.widget-title {

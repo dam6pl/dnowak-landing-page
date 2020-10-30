@@ -1,7 +1,9 @@
-import React from 'react';
+const NotFound = () => {
+  if (typeof window !== "undefined") {
+    window.location = "/";
+  }
 
-const NotFound = () => (
-  <div>404</div>
-);
+  return null;
+};
 
 export default NotFound;

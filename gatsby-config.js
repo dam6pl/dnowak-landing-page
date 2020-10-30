@@ -1,38 +1,59 @@
-/**
- * Configure your Gatsby site with this file.
- *
- * See: https://www.gatsbyjs.com/docs/gatsby-config/
- */
+require("dotenv").config({ path: ".env" });
 
 module.exports = {
-  /* Your site config here */
   siteMetadata: {
-    title: 'Damian Nowak - Programista PHP, JavaScript',
-    titleTemplate: '%s - Damian Nowak',
-    description: 'Hogwarts Potions master, Head of Slytherin house and former Death Eater.',
-    url: 'https://dnowak.dev',
-    image: '/images/snape.jpg',
+    url: process.env.GATSBY_DOMAIN,
   },
   plugins: [
-    'gatsby-plugin-sass',
+    "gatsby-plugin-sass",
+    "gatsby-plugin-react-helmet",
     {
-      resolve: '@directus/gatsby-source-directus',
+      resolve: "gatsby-plugin-manifest",
       options: {
-        url: 'https://cms.dnowak.dev/public',
-        project: 'dnowakdev',
-        auth: {
-          token: 'ut9qEmxqtIDc13EqLi26FB4b',
-        },
-        targetStatuses: ['published', '__NONE__'],
+        name: "Damian Nowak",
+        short_name: "Damian Nowak",
+        start_url: "/",
+        background_color: "#f7f0eb",
+        theme_color: "#2ed7b8",
+        display: "standalone",
+        icon: "static/logo.png",
       },
     },
     {
-      resolve: 'gatsby-plugin-react-svg',
+      resolve: "@directus/gatsby-source-directus",
+      options: {
+        url: process.env.DIRECTUS_URL,
+        project: process.env.DIRECTUS_PROJECT,
+        auth: {
+          token: process.env.DIRECTUS_TOKEN,
+        },
+        targetStatuses: ["published", "__NONE__"],
+      },
+    },
+    {
+      resolve: "gatsby-plugin-react-svg",
       options: {
         rule: {
-          include: /assets\/images\/svg/
-        }
-      }
-    }
+          include: /assets\/images\/svg/,
+        },
+      },
+    },
+    {
+      resolve: "gatsby-plugin-google-analytics",
+      options: {
+        trackingId: process.env.GA_TRACKING_ID,
+        head: false,
+        anonymize: true,
+        respectDNT: true,
+      },
+    },
+    {
+      resolve: "gatsby-plugin-hotjar",
+      options: {
+        includeInDevelopment: false,
+        id: process.env.HOTJAR_ID,
+        sv: process.env.HOTJAR_SNIPPET_VERSION,
+      },
+    },
   ],
 };

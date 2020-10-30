@@ -1,0 +1,15 @@
+{
+  "name": "dnowak-landing-page",
+  "schemaPath": "schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "dnowak-landing-page": {
+        "url": "http://localhost:8000/___graphql",
+        "headers": {
+          "user-agent": "JS GraphQL"
+        },
+        "introspect": false
+      }
+    }
+  }
+}

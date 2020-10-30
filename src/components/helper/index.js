@@ -1,2 +1,2 @@
-export { default as Photo } from './Photo';
-export { default as LanguageSwitch } from './LanguageSwitch';
+export { default as LazyPhoto } from "./LazyPhoto";
+export { default as LanguageSwitch } from "./LanguageSwitch";

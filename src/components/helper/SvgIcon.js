@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import PropTypes from 'prop-types';
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 
 const SvgIcon = ({ url }) => {
   const [svg, setSvg] = useState(null);
@@ -17,8 +16,9 @@ const SvgIcon = ({ url }) => {
 
   return (
     <div
-      className={`svgInline svgInline--${isLoaded ? 'loaded' : 'loading'} ${isErrored ? 'svgInline--errored' : ''}`}
-      // eslint-disable-next-line react/no-danger
+      className={`svgInline svgInline--${isLoaded ? "loaded" : "loading"} ${
+        isErrored ? "svgInline--errored" : ""
+      }`}
       dangerouslySetInnerHTML={{ __html: svg }}
     />
   );
@@ -27,5 +27,5 @@ const SvgIcon = ({ url }) => {
 export default SvgIcon;
 
 SvgIcon.propTypes = {
-  url: PropTypes.string.isRequired
+  url: PropTypes.string.isRequired,
 };
