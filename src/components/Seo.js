@@ -55,9 +55,6 @@ const SEO = ({language, title, description, keywords, image}) => {
     image: image || seoImage?.url || ''
   };
 
-  console.clear();
-  console.log(seo);
-
   return (
     <Helmet title={seo.title} titleTemplate={seo.titleTemplate}>
       <meta name="description" content={seo.description}/>

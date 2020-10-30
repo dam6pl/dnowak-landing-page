@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Cookie from "universal-cookie";
 import { Layout } from "../components/layout";
-import { Seo } from "../components";
 import { PersonCard } from "../components/person";
 import { BubblesBackground, NavMenu } from "../components/layout";
 import { LanguageSwitch } from "../components/helper";
@@ -13,8 +12,7 @@ const About = () => {
   const isEnglish = language === "en";
 
   return (
-    <Layout language={language}>
-      <Seo language={language} title={isEnglish ? "About" : "O mnie"} />
+    <Layout language={language} seoTitle={isEnglish ? "About" : "O mnie"} >
       <div className="page new-skin">
         <BubblesBackground />
 
