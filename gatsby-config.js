@@ -64,7 +64,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-env-variables`,
       options: {
-        allowList: ["DIRECTUS_URL", "DIRECTUS_PROJECT"]
+        allowList: ["DIRECTUS_URL", "DIRECTUS_PROJECT", "RECAPTCHA_KEY"],
       },
     },
   ],
