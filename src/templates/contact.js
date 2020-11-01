@@ -27,7 +27,7 @@ const Contact = () => {
           <div className="card-inner contacts active" id="contacts-card">
             <div className="card-wrap">
               <GoogleReCaptchaProvider
-                reCaptchaKey={process.env.RECAPTCHA_KEY}
+                reCaptchaKey="6LelXLgUAAAAANdJ9h5jZqn8Rq2JCDdMHuXbOBgw"
                 language={language}
               >
                 <ContactMap language={language} />
