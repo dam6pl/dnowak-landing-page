@@ -1337,6 +1337,11 @@
   .map {
     margin: 0 0 20px 0;
     height: 190px;
+
+    iframe {
+      width: 100%;
+      height: 100%;
+    }
   }
 }
 
@@ -3366,5 +3371,24 @@ p.no-comments {
       top: 5px;
       position: fixed;
     }
+  }
+}
+
+.is-rev {
+  unicode-bidi:bidi-override;
+  direction:rtl;
+
+  span {
+    user-select: none;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    background: transparent;
+    width: 50%;
+    right: 0;
+    top: 0;
+    bottom: 0;
   }
 }

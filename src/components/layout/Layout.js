@@ -1,12 +1,12 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Helmet from "react-helmet";
 import PropTypes from "prop-types";
-import {library} from "@fortawesome/fontawesome-svg-core";
-import {fas} from "@fortawesome/free-solid-svg-icons";
-import {fab} from "@fortawesome/free-brands-svg-icons";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { fab } from "@fortawesome/free-brands-svg-icons";
 import Cookie from "universal-cookie";
-import {Loader} from "./";
-import {Seo} from "../index";
+import { Loader } from "./";
+import { Seo } from "../index";
 
 import "../../assets/stylesheets/basic.scss";
 import "../../assets/stylesheets/layout.scss";
@@ -16,7 +16,14 @@ import "../../assets/stylesheets/css/dark.css";
 
 library.add(fas, fab);
 
-const Layout = ({language, children, seoTitle, seoDescription, seoKeywords, seoImage}) => {
+const Layout = ({
+  language,
+  children,
+  seoTitle,
+  seoDescription,
+  seoKeywords,
+  seoImage,
+}) => {
   const cookie = new Cookie();
   const [firstTime] = useState(cookie.get("loaded") !== "1");
   const [loadStage, setLoadStage] = useState(0);
@@ -28,7 +35,7 @@ const Layout = ({language, children, seoTitle, seoDescription, seoKeywords, seoI
 
     setTimeout(
       () => {
-        firstTime && cookie.set("loaded", "1", {path: "/"});
+        firstTime && cookie.set("loaded", "1", { path: "/" });
         setLoadStage(3);
       },
       firstTime ? 4000 : 300
@@ -37,16 +44,18 @@ const Layout = ({language, children, seoTitle, seoDescription, seoKeywords, seoI
 
   return (
     <div id="application">
-      <Seo key="app-seo"
-           language={language}
-           title={seoTitle}
-           description={seoDescription}
-           image={seoImage}
-           keywords={seoKeywords}/>
+      <Seo
+        key="app-seo"
+        language={language}
+        title={seoTitle}
+        description={seoDescription}
+        image={seoImage}
+        keywords={seoKeywords}
+      />
       <Helmet key="app-head">
-        <html lang={language}/>
-        <meta charSet="utf-8"/>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+        <html lang={language} />
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <link
           href="https://fonts.googleapis.com/css?family=Poppins"
           rel="stylesheet"

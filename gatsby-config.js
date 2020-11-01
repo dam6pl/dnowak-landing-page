@@ -59,7 +59,13 @@ module.exports = {
       resolve: `gatsby-plugin-purgecss`,
       options: {
         tailwind: true,
-      }
-    }
+      },
+    },
+    {
+      resolve: `gatsby-plugin-env-variables`,
+      options: {
+        allowList: ["DIRECTUS_URL", "DIRECTUS_PROJECT"]
+      },
+    },
   ],
 };

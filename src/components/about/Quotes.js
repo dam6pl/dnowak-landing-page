@@ -7,7 +7,7 @@ const Quotes = ({ language }) => {
   return (
     <div className="content quote">
       <div className="title">
-        <span>Quote</span>
+        <span>{isEnglish ? "Quote" : "Opinie"}</span>
       </div>
 
       <div className="row">

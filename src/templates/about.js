@@ -12,7 +12,7 @@ const About = () => {
   const isEnglish = language === "en";
 
   return (
-    <Layout language={language} seoTitle={isEnglish ? "About" : "O mnie"} >
+    <Layout language={language} seoTitle={isEnglish ? "About" : "O mnie"}>
       <div className="page new-skin">
         <BubblesBackground />
 
