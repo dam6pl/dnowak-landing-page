@@ -59,18 +59,14 @@ module.exports = {
       resolve: `gatsby-plugin-purgecss`,
       options: {
         tailwind: true,
-        whitelist: ['iframe']
+        whitelist: ["iframe"],
       },
     },
     {
       resolve: `gatsby-plugin-env-variables`,
       options: {
-        allowList: ["DIRECTUS_URL", "DIRECTUS_PROJECT", "RECAPTCHA_KEY"],
+        allowList: ["DIRECTUS_URL", "DIRECTUS_PROJECT"],
       },
     },
-    // {
-    //   resolve: `gatsby-plugin-create-client-paths`,
-    //   options: { prefixes: [`/*`] },
-    // }
   ],
 };
