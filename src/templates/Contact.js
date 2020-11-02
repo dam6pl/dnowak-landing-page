@@ -1,7 +1,6 @@
 import React from "react";
 import {ContactForm, ContactMap} from "../components/contact";
 import PropTypes from "prop-types";
-import About from "./about";
 
 const Contact = ({language, setSeoTitle}) => {
   setSeoTitle(language === 'en' ? 'Contact' : 'Kontakt');
@@ -18,7 +17,7 @@ const Contact = ({language, setSeoTitle}) => {
 
 export default Contact;
 
-About.propTypes = {
+Contact.propTypes = {
   language: PropTypes.string.isRequired,
   path: PropTypes.string.isRequired,
   setSeoTitle: PropTypes.func.isRequired,
