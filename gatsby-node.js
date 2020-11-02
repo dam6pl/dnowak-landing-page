@@ -1,11 +1,8 @@
-exports.createPages = async ({ actions: { createPage } }) => {
-  createPage({
-    path: "/",
-    component: `${__dirname}/src/templates/about.js`,
-  });
+exports.onCreatePage = async ({ page, actions }) => {
+  const { createPage } = actions
 
-  createPage({
-    path: "/contact/",
-    component: `${__dirname}/src/templates/contact.js`,
-  });
-};
+  if (page.path === `/`) {
+    page.matchPath = `/*`
+    createPage(page)
+  }
+}

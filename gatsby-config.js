@@ -68,5 +68,9 @@ module.exports = {
         allowList: ["DIRECTUS_URL", "DIRECTUS_PROJECT", "RECAPTCHA_KEY"],
       },
     },
+    // {
+    //   resolve: `gatsby-plugin-create-client-paths`,
+    //   options: { prefixes: [`/*`] },
+    // }
   ],
 };
