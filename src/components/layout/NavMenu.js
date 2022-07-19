@@ -1,15 +1,15 @@
 import { Link } from "@reach/router";
-import React from "react";
-import PropTypes from "prop-types";
+import React, {useContext} from "react";
 import { useStaticQuery, graphql } from "gatsby";
 import Typed from "react-typed";
 import { LazyPhoto } from "../helper";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { GlobalStateContext } from "../../context/GlobalStateProvider";
+import Translate from "../helper/Translate";
 
-const NavMenu = ({ language }) => {
-  const pathname =
-    typeof window === "undefined" ? "/" : window.location.pathname;
-  const isEnglish = language === "en";
+const NavMenu = () => {
+  const globalState = useContext(GlobalStateContext);
+  const pathname = typeof window === "undefined" ? "/" : window.location.pathname;
 
   const {
     homepage: { developerName, developerPhoto, translations },
@@ -41,7 +41,7 @@ const NavMenu = ({ language }) => {
   `);
 
   const currentTranslation = translations.find(
-    (el) => el.language === language
+    (el) => el.language === globalState.language
   );
 
   return (
@@ -77,7 +77,7 @@ const NavMenu = ({ language }) => {
           <li className={pathname === "/" ? "active" : ""}>
             <Link to="/">
               <FontAwesomeIcon icon={["fas", "user"]} size="lg" />
-              <span className="link">{isEnglish ? "About" : "O mnie"}</span>
+                <Translate id="pages.about_me" className="link"/>
             </Link>
           </li>
           {/*<li className={pathname.indexOf("/resume") === 0 ? "active" : ""}>*/}
@@ -101,7 +101,7 @@ const NavMenu = ({ language }) => {
           <li className={pathname.indexOf("/contact") === 0 ? "active" : ""}>
             <Link to="/contact/">
               <FontAwesomeIcon icon={["fas", "envelope"]} size="lg" />
-              <span className="link">{isEnglish ? "Contact" : "Kontakt"}</span>
+              <Translate id='pages.contact' className="link" />
             </Link>
           </li>
         </ul>
@@ -111,7 +111,3 @@ const NavMenu = ({ language }) => {
 };
 
 export default NavMenu;
-
-NavMenu.propTypes = {
-  language: PropTypes.string.isRequired,
-};

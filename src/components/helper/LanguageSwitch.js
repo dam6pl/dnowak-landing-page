@@ -1,10 +1,10 @@
-import React from "react";
-import Cookies from "universal-cookie";
+import React, {useContext} from "react";
 import { useStaticQuery, graphql } from "gatsby";
-import PropTypes from "prop-types";
+import {GlobalDispatchContext, GlobalStateContext} from "../../context/GlobalStateProvider";
 
-const LanguageSwitch = ({ language, setLanguage }) => {
-  const cookie = new Cookies();
+const LanguageSwitch = () => {
+  const globalState = useContext(GlobalStateContext);
+  const globalDispatch = useContext(GlobalDispatchContext);
   const {
     allTranslation: { translations },
   } = useStaticQuery(graphql`
@@ -18,23 +18,15 @@ const LanguageSwitch = ({ language, setLanguage }) => {
     }
   `);
 
-  const handleChangeLanguage = (e) => {
-    setLanguage(e.currentTarget.getAttribute("data-lang"));
-    cookie.set("language", e.currentTarget.getAttribute("data-lang"), {
-      path: "/",
-      expires: new Date(Date.now() + 2592000),
-    });
-  };
-
   return (
     <div className="language-switcher">
       {translations.map((el) => (
         <button
-          onClick={handleChangeLanguage}
+          onClick={() => globalDispatch({type: "CHANGE_LANGUAGE_" + el.language.toUpperCase()})}
           key={`language-${Math.random()}`}
           type="button"
           data-lang={el.language}
-          className={language === el.language ? "active" : ""}
+          className={globalState.language === el.language ? "active" : ""}
         >
           {el.language}
         </button>
@@ -44,8 +36,3 @@ const LanguageSwitch = ({ language, setLanguage }) => {
 };
 
 export default LanguageSwitch;
-
-LanguageSwitch.propTypes = {
-  language: PropTypes.string.isRequired,
-  setLanguage: PropTypes.func.isRequired,
-};

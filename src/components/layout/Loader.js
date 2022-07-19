@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Logo from "../../assets/images/svg/logo.svg";
 
-const Loader = ({ withLogo, duration }) => {
+const Loader = ({ duration }) => {
   const [styles, setStyles] = useState({ opacity: 1 });
 
   useEffect(() => {
@@ -13,13 +13,11 @@ const Loader = ({ withLogo, duration }) => {
 
   return (
     <div className="preloader" style={styles}>
-      {withLogo && (
-        <div className="centrize full-width">
-          <div className="vertical-center">
-            <Logo />
-          </div>
+      <div className="centrize full-width">
+        <div className="vertical-center">
+          <Logo />
         </div>
-      )}
+      </div>
     </div>
   );
 };

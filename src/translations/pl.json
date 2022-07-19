@@ -1,0 +1,13 @@
+{
+  "pages": {
+    "about_me": "O mnie",
+    "contact": "Kontakt"
+  },
+  "buttons": {
+    "download_cv": "Pobierz CV",
+    "contact_me": "Skontaktuj się"
+  },
+  "contact": {
+    "map_title": "Kontakt"
+  }
+}

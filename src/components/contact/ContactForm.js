@@ -1,21 +1,24 @@
-import React, { useState } from "react";
-import { useStaticQuery, graphql } from "gatsby";
+import React, {useContext, useState} from "react";
+import {useStaticQuery, graphql} from "gatsby";
 import PropTypes from "prop-types";
-import { GoogleReCaptcha } from "react-google-recaptcha-v3";
+import {GoogleReCaptcha} from "react-google-recaptcha-v3";
+import {GlobalStateContext} from "../../context/GlobalStateProvider";
+import Translate from "../helper/Translate";
+import translate from "../../helper/translate";
 
-const ContactForm = ({ language }) => {
-  const isEnglish = language === "en";
+const ContactForm = () => {
+  const globalState = useContext(GlobalStateContext);
   const [formResponse, setFormResponse] = useState();
   const [captchaToken, setCaptchaToken] = useState();
 
   const {
-    contact: { email },
+    contact: {email},
   } = useStaticQuery(graphql`
-    {
-      contact: directusContact {
-        email: email_address
+      {
+          contact: directusContact {
+              email: email_address
+          }
       }
-    }
   `);
 
   const handleSubmit = (form) => {
@@ -24,12 +27,12 @@ const ContactForm = ({ language }) => {
 
     fetch(
       process.env.DIRECTUS_URL +
-        "/" +
-        process.env.DIRECTUS_PROJECT +
-        "/custom/sendEmail",
+      "/" +
+      process.env.DIRECTUS_PROJECT +
+      "/custom/sendEmail",
       {
         method: "POST",
-        headers: new Headers({ "content-type": "application/json" }),
+        headers: new Headers({"content-type": "application/json"}),
         body: JSON.stringify({
           language: language,
           target: email,
@@ -56,11 +59,11 @@ const ContactForm = ({ language }) => {
   return (
     <div className="content contacts">
       <div className="title">
-        {isEnglish ? "Contact Form" : "Formularz kontaktowy"}
+        <Translate id="contact.form_title"/>
       </div>
 
       {!captchaToken && (
-        <GoogleReCaptcha onVerify={(token) => setCaptchaToken(token)} />
+        <GoogleReCaptcha onVerify={(token) => setCaptchaToken(token)}/>
       )}
 
       <div className="row">
@@ -75,7 +78,7 @@ const ContactForm = ({ language }) => {
                       name="name"
                       id="contact_name"
                       required="required"
-                      placeholder={isEnglish ? "Full Name *" : "Nazwa *"}
+                      placeholder={translate('contact.name', globalState.language)}
                     />
                   </div>
                 </div>
@@ -85,9 +88,7 @@ const ContactForm = ({ language }) => {
                       type="email"
                       name="email"
                       required="required"
-                      placeholder={
-                        isEnglish ? "Email Address *" : "Adres email *"
-                      }
+                      placeholder={translate('contact.email', globalState.language)}
                     />
                   </div>
                 </div>
@@ -96,9 +97,7 @@ const ContactForm = ({ language }) => {
                     <textarea
                       name="message"
                       required="required"
-                      placeholder={
-                        isEnglish ? "Your Message *" : "Twoja wiadomość *"
-                      }
+                      placeholder={translate('contact.message', globalState.language)}
                     />
                   </div>
                 </div>
@@ -109,43 +108,24 @@ const ContactForm = ({ language }) => {
                   className="button"
                   disabled={!captchaToken ? "disabled" : null}
                 >
-                  <span className="text">
-                    {isEnglish ? "Send Message" : "Wyślij wiadomość"}
-                  </span>
-                  <span className="arrow" />
+                  <Translate id='contact.send' className="text"/>
+                  <span className="arrow"/>
                 </button>
               </div>
             </form>
-            <div className="alert-success" style={{ display: "block" }}>
-              {formResponse === undefined ? (
-                ""
-              ) : formResponse === true ? (
-                isEnglish ? (
-                  <p>Thanks, your message is sent successfully.</p>
-                ) : (
-                  <p>Dziękuję, Twoja wiadomość została wysłana.</p>
-                )
-              ) : isEnglish ? (
-                <p>
-                  Your message has not been send correctly, please try again.
-                </p>
+            <div className="alert-success" style={{display: "block"}}>
+              {formResponse === undefined ? null : formResponse === true ? (
+                <p><Translate id='contact.success_message'/></p>
               ) : (
-                <p>
-                  Twoja wiadomość nie została wysłana poprawnie, spróbuj
-                  ponownie.
-                </p>
+                <p><Translate id='contact.error_message'/></p>
               )}
             </div>
           </div>
         </div>
-        <div className="clear" />
+        <div className="clear"/>
       </div>
     </div>
   );
 };
 
 export default ContactForm;
-
-ContactForm.propTypes = {
-  language: PropTypes.string.isRequired,
-};

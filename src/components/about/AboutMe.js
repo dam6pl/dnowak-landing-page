@@ -1,9 +1,11 @@
-import React from "react";
+import React, {useContext} from "react";
 import { useStaticQuery, graphql } from "gatsby";
 import PropTypes from "prop-types";
+import {GlobalStateContext} from "../../context/GlobalStateProvider";
+import Translate from "../helper/Translate";
 
-const AboutMe = ({ language }) => {
-  const isEnglish = language === "en";
+const AboutMe = () => {
+  const globalState = useContext(GlobalStateContext);
 
   const {
     about: { translations },
@@ -23,12 +25,14 @@ const AboutMe = ({ language }) => {
   `);
 
   const currentTranslation = translations.find(
-    (el) => el.language === language
+    (el) => el.language === globalState.language
   );
 
   return (
     <div className="content about">
-      <div className="title">{isEnglish ? "About me" : "O mnie"}</div>
+      <div className="title">
+        <Translate id='pages.contact'/>
+      </div>
 
       <div className="row">
         <div className="col col-d-6 col-t-6 col-m-12 border-line-v">
@@ -60,7 +64,3 @@ const AboutMe = ({ language }) => {
 };
 
 export default AboutMe;
-
-AboutMe.propTypes = {
-  language: PropTypes.string.isRequired,
-};

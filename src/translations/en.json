@@ -1,0 +1,20 @@
+{
+  "pages": {
+    "about_me": "About me",
+    "contact": "Contact"
+  },
+  "buttons": {
+    "download_cv": "Download CV",
+    "contact_me": "Contact me"
+  },
+  "contact": {
+    "map_title": "Get in Touch",
+    "form_title": "Contact Form",
+    "name": "Full Name *",
+    "email": "Email Address *",
+    "message": "Your Message *",
+    "send": "Send Message",
+    "success_message": "Thanks, your message is sent successfully.",
+    "error_message": "Your message has not been send correctly, please try again."
+  }
+}

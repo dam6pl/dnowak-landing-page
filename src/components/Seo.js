@@ -1,11 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Helmet } from "react-helmet";
-import { useLocation } from "@reach/router";
-import { useStaticQuery, graphql } from "gatsby";
+import React, { useContext } from 'react'
+import PropTypes from 'prop-types'
+import { Helmet } from 'react-helmet'
+import { useLocation } from '@reach/router'
+import { useStaticQuery, graphql } from 'gatsby'
+import { GlobalStateContext } from '../context/GlobalStateProvider'
 
-const SEO = ({ language, title, description, keywords, image }) => {
-  const { pathname } = useLocation();
+const SEO = ({ title, description, keywords, image }) => {
+  const globalState = useContext(GlobalStateContext)
+  const { pathname } = useLocation()
   const {
     site: {
       siteMetadata: { siteUrl },
@@ -35,29 +37,30 @@ const SEO = ({ language, title, description, keywords, image }) => {
         }
       }
     }
-  `);
+  `)
 
   const currentTranslation = translations.find(
-    (el) => el.language === language
-  );
+    (el) => el.language === globalState.language
+  )
 
   const seoImage =
     currentTranslation.seo_image &&
     currentTranslation.seo_image?.data?.thumbnails.find(
-      (el) => el.key === "directus-large-contain"
-    );
+      (el) => el.key === 'directus-large-contain'
+    )
 
   const seo = {
-    title: title || "",
-    titleTemplate: currentTranslation?.seo_title_template || "",
-    description: description || currentTranslation?.seo_description || "",
-    keywords: keywords || currentTranslation?.seo_keywords || "",
+    title: title || '',
+    titleTemplate: currentTranslation?.seo_title_template || '',
+    description: description || currentTranslation?.seo_description || '',
+    keywords: keywords || currentTranslation?.seo_keywords || '',
     url: `${siteUrl}${pathname}`,
-    image: image || seoImage?.url || "",
-  };
+    image: image || seoImage?.url || '',
+  }
 
   return (
     <Helmet title={seo.title} titleTemplate={seo.titleTemplate}>
+      <html lang={globalState.language} />
       <meta name="description" content={seo.description} />
       {seo.image && <meta name="image" content={seo.image} />}
       {/* Facebook */}
@@ -77,22 +80,21 @@ const SEO = ({ language, title, description, keywords, image }) => {
       )}
       {seo.image && <meta property="twitter:image" content={seo.image} />}
     </Helmet>
-  );
-};
+  )
+}
 
-export default SEO;
+export default SEO
 
 SEO.propTypes = {
-  language: PropTypes.string.isRequired,
   title: PropTypes.string,
   description: PropTypes.string,
   keywords: PropTypes.string,
   image: PropTypes.string,
-};
+}
 
 SEO.defaultProps = {
   title: null,
   description: null,
   keywords: null,
   image: null,
-};
+}

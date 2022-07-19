@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
-import Helmet from "react-helmet";
+import React, {useEffect, useState} from "react";
 import PropTypes from "prop-types";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { fas } from "@fortawesome/free-solid-svg-icons";
-import { fab } from "@fortawesome/free-brands-svg-icons";
+import {library} from "@fortawesome/fontawesome-svg-core";
+import {fas} from "@fortawesome/free-solid-svg-icons";
+import {fab} from "@fortawesome/free-brands-svg-icons";
+import {BubblesBackground, Loader} from "./";
+import {Seo} from "../index";
 import Cookie from "universal-cookie";
-import { Loader } from "./";
-import { Seo } from "../index";
+import NavMenu from "./NavMenu";
+import PersonCard from "../person/PersonCard";
+import LanguageSwitch from "../helper/LanguageSwitch";
 
 import "../../assets/stylesheets/basic.scss";
 import "../../assets/stylesheets/layout.scss";
@@ -17,59 +19,53 @@ import "../../assets/stylesheets/css/dark.css";
 library.add(fas, fab);
 
 const Layout = ({
-  language,
-  children,
-  seoTitle,
-  seoDescription,
-  seoKeywords,
-  seoImage,
-}) => {
+                  children,
+                  seoTitle,
+                  seoDescription,
+                  seoKeywords,
+                  seoImage,
+                }) => {
   const cookie = new Cookie();
   const [firstTime] = useState(cookie.get("loaded") !== "1");
-  const [loadStage, setLoadStage] = useState(0);
+  const [isLoading, setIsLoading] = useState(null);
 
   useEffect(() => {
-    setLoadStage(1);
+    if (!firstTime) {
+      return;
+    }
 
-    setTimeout(() => setLoadStage(2), 100);
+    setIsLoading(true);
 
-    setTimeout(
-      () => {
-        firstTime && cookie.set("loaded", "1", { path: "/" });
-        setLoadStage(3);
-      },
-      firstTime ? 4000 : 300
-    );
+    const unsetLoader = () => {
+      cookie.set("loaded", "1", {path: "/"});
+      setIsLoading(false);
+    };
+
+    setTimeout(() => unsetLoader, 4000);
   }, []);
 
   return (
     <div id="application">
       <Seo
         key="app-seo"
-        language={language}
         title={seoTitle}
         description={seoDescription}
         image={seoImage}
         keywords={seoKeywords}
       />
-      <Helmet key="app-head">
-        <html lang={language} />
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <link
-          href="https://fonts.googleapis.com/css?family=Poppins"
-          rel="stylesheet"
-        />
-      </Helmet>
-      {(loadStage === 1 || loadStage === 2) && (
-        <Loader
-          key="app-loader"
-          withLogo={firstTime}
-          duration={firstTime ? 4000 : 300}
-        />
-      )}
-      {(loadStage === 2 || loadStage === 3) && (
-        <div key="app-content">{children}</div>
+      {isLoading ? (
+        <Loader key="app-loader" duration={4000}/>
+      ) : (
+        <div className="page new-skin">
+          <BubblesBackground/>
+
+          <div className="container opened">
+            <NavMenu/>
+            <PersonCard/>
+            <LanguageSwitch/>
+            <div key="app-content">{children}</div>
+          </div>
+        </div>
       )}
     </div>
   );
@@ -78,7 +74,6 @@ const Layout = ({
 export default Layout;
 
 Layout.propTypes = {
-  language: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,

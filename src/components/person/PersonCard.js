@@ -1,28 +1,33 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useStaticQuery, graphql } from "gatsby";
 import Typed from "react-typed";
 import { Link } from "@reach/router";
-import PropTypes from "prop-types";
+import { GlobalStateContext } from "../../context/GlobalStateProvider";
 import { LazyPhoto } from "./../helper";
 import { SocialIcons } from "./";
+import Translate from "../helper/Translate";
 
-const PersonCard = ({ language }) => {
-  const isEnglish = language === "en";
+const PersonCard = () => {
+  const globalState = useContext(GlobalStateContext);
   const {
-    homepage: {
+    directusHomepage: {
       developerName,
-      backgroundImage,
-      developerPhoto,
+      background_image: {
+        data: { backgroundThumbnails },
+      },
+      developer_photo: {
+        data: { developerThumbnails },
+      },
       translations,
       socialIcons,
     },
   } = useStaticQuery(graphql`
     {
-      homepage: directusHomepage {
+      directusHomepage {
         developerName: developer_name
-        backgroundImage: background_image {
+        background_image {
           data {
-            thumbnails {
+            backgroundThumbnails: thumbnails {
               key
               url
               relative_url
@@ -32,9 +37,9 @@ const PersonCard = ({ language }) => {
             }
           }
         }
-        developerPhoto: developer_photo {
+        developer_photo {
           data {
-            thumbnails {
+            developerThumbnails: thumbnails {
               key
               url
               relative_url
@@ -44,7 +49,7 @@ const PersonCard = ({ language }) => {
             }
           }
         }
-        translations: translations {
+        translations {
           language
           developer_position {
             Position_name
@@ -65,16 +70,16 @@ const PersonCard = ({ language }) => {
   `);
 
   const currentTranslation = translations.find(
-    (el) => el.language === language
+    (el) => el.language === globalState.language
   );
 
   return (
     <div className="card-started" id="home-card">
       <div className="profile">
         <div className="slide">
-          {backgroundImage && (
+          {backgroundThumbnails && (
             <LazyPhoto
-              image={backgroundImage?.data?.thumbnails}
+              image={backgroundThumbnails}
               alt={developerName}
               imageSize="directus-large-crop"
             />
@@ -82,9 +87,9 @@ const PersonCard = ({ language }) => {
         </div>
 
         <div className="image">
-          {developerPhoto && (
+          {developerThumbnails && (
             <LazyPhoto
-              image={developerPhoto?.data?.thumbnails}
+              image={developerThumbnails}
               alt={developerName}
               imageSize="directus-medium-crop"
             />
@@ -94,10 +99,10 @@ const PersonCard = ({ language }) => {
         <div className="title">{developerName}</div>
         <div className="subtitle subtitle-typed">
           <div className="typing-title">
-            {currentTranslation?.developer_position && (
+            {currentTranslation.developer_position && (
               <Typed
-                strings={currentTranslation?.developer_position.map(
-                  (el) => el?.Position_name || ""
+                strings={currentTranslation.developer_position.map(
+                  (el) => el.Position_name || ""
                 )}
                 typeSpeed={40}
                 backSpeed={50}
@@ -118,15 +123,11 @@ const PersonCard = ({ language }) => {
                 rel="noreferrer"
                 className="lnk"
               >
-                <span className="text">
-                  {isEnglish ? "Download CV" : "Pobierz CV"}
-                </span>
+                <Translate id="buttons.download_cv" className="text"/>
               </a>
             )}
           <Link to="/contact/" className="lnk discover">
-            <span className="text">
-              {isEnglish ? "Contact Me" : "Skontaktuj się"}
-            </span>
+            <Translate id="buttons.contact_me" className="text"/>
           </Link>
         </div>
       </div>
@@ -135,7 +136,3 @@ const PersonCard = ({ language }) => {
 };
 
 export default PersonCard;
-
-PersonCard.propTypes = {
-  language: PropTypes.string.isRequired,
-};
